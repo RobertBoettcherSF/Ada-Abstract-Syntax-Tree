@@ -18,7 +18,7 @@ procedure Tests is
       end if;
    end Check;
 
-   Env : Environment := (others => 0);
+   Env : Environment := [others => 0];
    Node, Left, Right : AST_Node_Access;
    Raised : Boolean;
 begin
@@ -34,7 +34,7 @@ begin
 
    -- TEST 2 - Variables
    Put_Line ("TEST 2 - Variables");
-   Env := (others => 0);
+   Env := [others => 0];
    Env (Char_To_Var ('X')) := 15;
    Node := Create_Variable (Char_To_Var ('X'));
    Check ("2.1 Variable Evaluate", Evaluate (Node, Env) = 15);
@@ -87,7 +87,7 @@ begin
 
    -- TEST 8 - Complex Expression: (A + B) * C
    Put_Line ("TEST 8 - Complex Expression: (A + B) * C");
-   Env := (others => 0);
+   Env := [others => 0];
    Env (Char_To_Var ('A')) := 2;
    Env (Char_To_Var ('B')) := 3;
    Env (Char_To_Var ('C')) := 4;
@@ -102,7 +102,7 @@ begin
 
    -- TEST 9 - Complex Expression: -(A + 5)
    Put_Line ("TEST 9 - Complex Expression: -(A + 5)");
-   Env := (others => 0);
+   Env := [others => 0];
    Env (Char_To_Var ('A')) := 5;
    Node := Create_Unary (Op_Neg, Create_Binary (Op_Add, Create_Variable (Char_To_Var ('A')), Create_Literal (5)));
    Check ("9.1 Expr2 Evaluate is -10", Evaluate (Node, Env) = -10);
@@ -113,7 +113,7 @@ begin
 
    -- TEST 10 - Division By Zero Edge Cases
    Put_Line ("TEST 10 - Division By Zero Edge Cases");
-   Env := (others => 0);
+   Env := [others => 0];
    
    -- 10.1
    Node := Create_Binary (Op_Div, Create_Literal (5), Create_Literal (0));
@@ -158,7 +158,7 @@ begin
 
    -- TEST 12 - Deep Tree Structure
    Put_Line ("TEST 12 - Deep Tree Structure");
-   Env := (others => 0);
+   Env := [others => 0];
    Env (Char_To_Var ('A')) := 2;
    Node := Create_Variable (Char_To_Var ('A'));
    for I in 1 .. 10 loop
@@ -175,7 +175,7 @@ begin
    Put_Line ("TEST 13 - Environment Mutability");
    Node := Create_Binary (Op_Add, Create_Variable (Char_To_Var ('X')), Create_Variable (Char_To_Var ('Y')));
    
-   Env := (others => 0);
+   Env := [others => 0];
    Env (Char_To_Var ('X')) := 10;
    Env (Char_To_Var ('Y')) := 20;
    Check ("13.1 Env 1 evaluates to 30", Evaluate (Node, Env) = 30);
