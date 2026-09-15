@@ -1,7 +1,6 @@
 pragma Assertion_Policy (Check);
 
 package Abstract_Syntax_Tree is
-   pragma Pure;
 
    -- Custom types for strong typing
    type Value_Type is new Integer;
