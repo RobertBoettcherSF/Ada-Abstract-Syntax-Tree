@@ -71,8 +71,8 @@ package body Abstract_Syntax_Tree is
             return Ada.Strings.Fixed.Trim (Value_Type'Image (Node.Value), Ada.Strings.Both);
             
          when Kind_Variable =>
-            -- Construct a 1-character string
-            return (1 => Var_To_Char (Node.Id));
+            -- Construct a 1-character string using Ada 2022 bracket syntax
+            return [1 => Var_To_Char (Node.Id)];
             
          when Kind_Unary_Op =>
             case Node.U_Op is
